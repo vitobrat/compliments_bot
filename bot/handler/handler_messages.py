@@ -6,7 +6,7 @@ router = Router()
 
 @router.callback_query(F.data == "contacts")
 @router.message(F.text == "Contacts")
-async def contacts_handler(update, bot: Bot) -> None:
+async def contacts_handler(update) -> None:
     if isinstance(update, types.Message):
         await update.edit_text(f"My contacts:{(await bot.get_me()).full_name}")
     elif isinstance(update, types.CallbackQuery):

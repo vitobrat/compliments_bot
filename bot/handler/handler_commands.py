@@ -1,7 +1,7 @@
 from aiogram import types, F, Router
 from aiogram.filters import Command
-
 from bot.keyboards import menu_keyboard
+from aiosqlitedatabase.database import add_user
 
 router = Router()
 
@@ -14,7 +14,8 @@ async def start_command(message: types.Message) -> None:
     :return: None
     """
     await message.answer("Welcome, nahui")
-    print(message.from_user.id)
+    await add_user(message.from_user.id, message.from_user.full_name, message.from_user.username)
+    print(message.from_user.id, message.from_user.full_name)
 
 
 @router.message(Command("help"))
