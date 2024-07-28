@@ -7,6 +7,13 @@ from aiosqlitedatabase.database import add_user
 
 router = Router()
 
+help_information = ("This is compliment sender bot. It would be delight you every day!\n"
+                    "There are some useful commands:\n"
+                    "<i><b>Send mode</b></i> - you can switch on/off sending compliments\n"
+                    "<i><b>Send compliment</b></i> - just send one compliment\n"
+                    "<i><b>Contacts</b></i> - my contacts (P.S. need to edit)\n"
+                    "<i><b>About project</b></i> - informational about this project")
+
 
 @router.message(Command("start"))
 async def start_command(message: types.Message) -> None:
@@ -30,11 +37,9 @@ async def help_command(update) -> None:
     :return: None
     """
     if isinstance(update, types.Message):
-        await update.answer("This is project about...\n"
-                            "There are some useful commands:", reply_markup=back_keyboard)
+        await update.answer(help_information, reply_markup=back_keyboard)
     elif isinstance(update, types.CallbackQuery):
-        await update.message.edit_text("This is project about...\n"
-                                       "There are some useful commands:", reply_markup=back_keyboard)
+        await update.message.edit_text(help_information, reply_markup=back_keyboard)
 
 
 @router.callback_query(F.data == "menu")

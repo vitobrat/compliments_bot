@@ -1,5 +1,10 @@
 from aiogram import types
 
+commands = [
+    types.BotCommand(command="/start", description="Start the bot"),
+    types.BotCommand(command="/help", description="Useful information"),
+    types.BotCommand(command="/menu", description="Menu with all functional")
+]
 
 
 back_keyboard_list = [
@@ -11,6 +16,7 @@ back_keyboard = types.InlineKeyboardMarkup(inline_keyboard=back_keyboard_list)
 
 menu_keyboard_list = [
     [types.InlineKeyboardButton(text="Send mode", callback_data="send_mode")],
+    [types.InlineKeyboardButton(text="Send compliment", callback_data="send_compliment")],
     [types.InlineKeyboardButton(text="Contacts", callback_data="contacts")],
     [types.InlineKeyboardButton(text="About project", callback_data="about_project")],
 ]

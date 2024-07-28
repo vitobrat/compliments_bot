@@ -1,13 +1,15 @@
 from aiogram import types, F, Router, Bot
 from bot.keyboards import back_keyboard
 from aiosqlitedatabase.database import get_user, switch_off_send_mode_by_id, switch_on_send_mode_by_id
+from bot.compliments.send_compliment import Compliment
+import asyncio
 
 router = Router()
 
 
 @router.callback_query(F.data == "contacts")
 async def contacts_handler(call: types.CallbackQuery, bot: Bot) -> None:
-    await call.message.edit_text(f"My contacts:{(await bot.get_me()).full_name}",
+    await call.message.edit_text(f"My contacts: @BratkoVictor",
                                  reply_markup=back_keyboard)
 
 
@@ -53,6 +55,12 @@ async def send_mode_switch_off(call: types.CallbackQuery):
 async def send_mode_switch_on(call: types.CallbackQuery):
     await switch_on_send_mode_by_id([call.from_user.id])
     await send_mode_handler(call)
+
+
+@router.callback_query(F.data == "send_compliment")
+async def send_compliment(call: types.CallbackQuery, bot: Bot):
+    compliment = Compliment()
+    asyncio.create_task(compliment.send_compliment(call.from_user.id, bot))
 
 
 @router.message(F.text)

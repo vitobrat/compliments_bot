@@ -46,6 +46,17 @@ async def admin_newsletter(call: types.CallbackQuery, state: FSMContext):
     await state.set_state(AdminState.newsletter)
 
 
+@router.message(AdminState.newsletter, AdminFilter())
+async def admin_newsletter_step_2(message: types.Message, state: FSMContext):
+    users_id = [id[0] for id in await get_all_users_id_with_send_mode()]
+    await state.update_data(message_newsletter=message)
+    for id in users_id:
+        with suppress():
+            await message.send_copy(id)
+            await sleep(0.3)
+    await state.clear()
+
+
 @router.callback_query(F.data == 'admin_send_mode_off', AdminFilter())
 async def admin_send_mode_on(call: types.CallbackQuery, state: FSMContext):
     await call.message.edit_text('Input ids list whose you want to switch off send mode (separated by a space):\n\n'
@@ -79,12 +90,4 @@ async def admin_send_mode_step_2(message: types.Message, state: FSMContext):
     await state.clear()
 
 
-@router.message(AdminState.newsletter, AdminFilter())
-async def admin_newsletter_step_2(message: types.Message, state: FSMContext):
-    users_id = [id[0] for id in await get_all_users_id_with_send_mode()]
-    await state.update_data(message_newsletter=message)
-    for id in users_id:
-        with suppress():
-            await message.send_copy(id)
-            await sleep(0.3)
-    await state.clear()
+

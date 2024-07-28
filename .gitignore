@@ -171,3 +171,4 @@ cython_debug/
 # Datasource local storage ignored files
 /dataSources/
 /dataSources.local.xml
+.idea/dataSources/f731447a-bc65-43e8-8ca5-8f24a8710067/storage_v2/_src_/schema/main.uQUzAA.meta
