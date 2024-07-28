@@ -1,4 +1,4 @@
-from aiogram import Bot, Dispatcher, types
+from aiogram import Bot, Dispatcher
 import asyncio
 from bot.compliments.send_compliment import run_send_compliment
 
