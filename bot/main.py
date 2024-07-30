@@ -27,7 +27,7 @@ async def main() -> None:
 
     await create_table()
 
-    asyncio.create_task(run_send_compliment(bot, 1))
+    asyncio.create_task(run_send_compliment(bot, 30))
     # Запускаем бота и пропускаем все накопленные входящие
     await bot.delete_webhook(drop_pending_updates=True)
     await dp.start_polling(bot)

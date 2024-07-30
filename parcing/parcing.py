@@ -3,7 +3,10 @@ import re
 from bs4 import BeautifulSoup
 
 # URL страницы с комплиментами
-URLs = ["https://datki.net/komplimenti/lubimoy/"]
+URLs = ["https://datki.net/komplimenti/v-stihah/figure/", "https://datki.net/romanticheskie-smski/lubimoy/v-stihah/",
+        "https://datki.net/romanticheskie-smski/lubimoy/v-stihah/page/2/", "https://datki.net/romanticheskie-smski/lubimoy/v-stihah/page/3/",
+        "https://datki.net/romanticheskie-smski/lubimoy/v-stihah/page/4/", "https://datki.net/romanticheskie-smski/lubimoy/v-stihah/page/5/",
+        "https://datki.net/romanticheskie-smski/lubimoy/v-stihah/page/6/", "https://datki.net/romanticheskie-smski/lubimoy/v-stihah/page/7/"]
 
 
 def fetch_compliments(url):
